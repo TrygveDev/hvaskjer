@@ -1,0 +1,10 @@
+.header {
+	margin: 0;
+	font-size: 1.75em;
+	margin-bottom: 0.5em;
+}
+.fullCentered {
+	position: absolute;
+	top: 40%;
+	left: 40%;
+}
