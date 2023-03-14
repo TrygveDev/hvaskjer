@@ -18,6 +18,16 @@ function ActivityPage() {
 						</div>
 					</Grid>
 					<Grid xs={12}>
+						<div className={styles.button}>
+							<Button variant="contained" color="primary">
+								Kontakt
+							</Button>
+							<Button variant="contained" color="success">
+								Påmelding
+							</Button>
+						</div>
+					</Grid>
+					<Grid xs={12}>
 						<div className={`${styles.item} ${styles.about}`}>
 							<div className={styles.aboutText}>
 								<h5>
@@ -33,16 +43,6 @@ function ActivityPage() {
 								<h3>{data.title}</h3>
 								<p>{data.desc}</p>
 							</div>
-						</div>
-					</Grid>
-					<Grid xs={12}>
-						<div className={styles.button}>
-							<Button variant="contained" color="primary">
-								Kontakt
-							</Button>
-							<Button variant="contained" color="success">
-								Påmelding
-							</Button>
 						</div>
 					</Grid>
 				</Grid>

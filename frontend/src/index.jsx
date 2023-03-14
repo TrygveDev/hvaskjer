@@ -12,7 +12,7 @@ import HomePage from "./routes/HomePage";
 import NewsPage from "./routes/NewsPage";
 import UserPage from "./routes/UserPage";
 import ActivityPage from "./routes/ActivityPage";
-import CreateActivityPage from "./routes/CreateActivityPage";
+import CreatePost from "./routes/CreatePost";
 
 const router = createBrowserRouter([
 	{
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
 		errorElement: <ErrorPage />,
 	},
 	{
-		path: "/nyheter",
+		path: "/nyhet",
 		element: <NewsPage />,
 		errorElement: <ErrorPage />,
 	},
@@ -36,8 +36,8 @@ const router = createBrowserRouter([
 		errorElement: <ErrorPage />,
 	},
 	{
-		path: "/opprett-aktivitet",
-		element: <CreateActivityPage />,
+		path: "/nypost",
+		element: <CreatePost />,
 		errorElement: <ErrorPage />,
 	},
 ]);

@@ -10,11 +10,8 @@ function UserPage() {
 		<div className={styles.container}>
 			<div className="content flex">
 				<Avatar sx={{ width: 100, height: 100 }} />
-				<Button
-					variant="contained"
-					onClick={() => nav("/opprett-aktivitet")}
-				>
-					+ Opprett aktivitet
+				<Button variant="contained" onClick={() => nav("/nypost")}>
+					+ Lag post
 				</Button>
 			</div>
 			<Navbar page={2} />

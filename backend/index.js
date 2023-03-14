@@ -11,6 +11,7 @@ mongoose.set("strictQuery", false);
 mongoose.connect(db, {});
 
 const activitySchema = new mongoose.Schema({
+    type: String,
     title: String,
     img: String,
     date: String,
@@ -41,6 +42,7 @@ app.post("/saveData", async (req, res) => {
     const data = req.body;
 
     const activityInfo = new activityData({
+        type: data.type,
         title: data.title,
         img: data.img,
         date: data.date,

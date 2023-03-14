@@ -39,9 +39,14 @@ function HomePage() {
 								<Grid
 									key={i}
 									xs={12}
-									onClick={() =>
-										nav("/aktivitet", { state: item })
-									}
+									onClick={() => {
+										console.log(item.type);
+										if (item.type === "aktivitet") {
+											nav("/aktivitet", { state: item });
+										} else if (item.type === "nyhet") {
+											nav("/nyhet", { state: item });
+										}
+									}}
 								>
 									<NewsCard
 										title={item.title}
