@@ -1,16 +1,16 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+import express from "express";
+import { set, connect, Schema, model } from "mongoose";
+import cors from "cors";
+import signup from "./salt.js";
 
 const app = express();
 const db = "mongodb+srv://trygvedev:lJBkBrWmIhqUd1IZ@cluster0.juec4ve.mongodb.net/activities";
 const port = 5001;
 
-mongoose.set("strictQuery", false);
-mongoose.connect(db, {});
+set("strictQuery", false);
+connect(db, {});
 
-const activitySchema = new mongoose.Schema({
+const activitySchema = new Schema({
     type: String,
     title: String,
     img: String,
@@ -20,9 +20,15 @@ const activitySchema = new mongoose.Schema({
     createdAt: { type: Date, expires: 60 * 60 * 12 },
 });
 
+const userSchema = new Schema({
+    username: String,
+    password: String,
+    createdAt: { type: Date, expires: 60 * 60 * 12 },
+});
 
-const activityData = mongoose.model("activityData", activitySchema);
-app.use(bodyParser.json());
+
+const activityData = model("activityData", activitySchema);
+const userData = model("userData", userSchema);
 
 const corsOptions = {
     origin: (origin, callback) => {
@@ -57,6 +63,20 @@ app.post("/saveData", async (req, res) => {
 app.get("/fetchData", async (req, res) => {
     const result = await activityData.find();
     res.json(result);
+});
+
+app.post("/createUser", async (req, res) => {
+    const data = req.body;
+    console.log(data);
+    const user = signup(data.username, data.password);
+
+    const userSignup = new userData({
+        username: user.username,
+        password: user.password
+    });
+
+    const result = await userSignup.save();
+    console.log(result);
 });
 
 app.listen(port, () => {

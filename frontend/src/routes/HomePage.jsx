@@ -61,7 +61,7 @@ function HomePage() {
 				</Grid>
 			</div>
 
-			<Navbar page={1} />
+			<Navbar page={0} />
 		</div>
 	);
 }

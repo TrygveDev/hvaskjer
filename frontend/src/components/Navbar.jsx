@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { Newspaper, Home, Person } from "@mui/icons-material";
+import { Home, Person } from "@mui/icons-material";
 import { useState } from "react";
 
 const styles = {
@@ -24,12 +24,10 @@ function Navbar(props) {
 			value={value}
 			onChange={(event, newValue) => {
 				setValue(newValue);
-				if (newValue === 0) nav("/nyheter");
-				if (newValue === 1) nav("/");
-				if (newValue === 2) nav("/dinside");
+				if (newValue === 0) nav("/");
+				if (newValue === 1) nav("/dinside");
 			}}
 		>
-			<BottomNavigationAction label="Nyheter" icon={<Newspaper />} />
 			<BottomNavigationAction label="Hjem" icon={<Home />} />
 			<BottomNavigationAction label="Din Side" icon={<Person />} />
 		</BottomNavigation>
