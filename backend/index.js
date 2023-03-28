@@ -1,9 +1,10 @@
 import express from "express";
 import { set, connect, Schema, model } from "mongoose";
 import cors from "cors";
-import signup from "./salt.js";
+import { signup, login } from "./salt.js";
 
 const app = express();
+app.use(express.json());
 const db = "mongodb+srv://trygvedev:lJBkBrWmIhqUd1IZ@cluster0.juec4ve.mongodb.net/activities";
 const port = 5001;
 
@@ -28,7 +29,7 @@ const userSchema = new Schema({
 
 
 const activityData = model("activityData", activitySchema);
-const userData = model("userData", userSchema);
+export const userData = model("userData", userSchema);
 
 const corsOptions = {
     origin: (origin, callback) => {
@@ -68,6 +69,8 @@ app.get("/fetchData", async (req, res) => {
 app.post("/createUser", async (req, res) => {
     const data = req.body;
     console.log(data);
+    const checkUsername = await userData.find({ username: data.username })
+    if (checkUsername) return console.log("Username already exists")
     const user = signup(data.username, data.password);
 
     const userSignup = new userData({
@@ -77,6 +80,18 @@ app.post("/createUser", async (req, res) => {
 
     const result = await userSignup.save();
     console.log(result);
+});
+
+app.post("/loginUser", async (req, res) => {
+    const data = req.body;
+    console.log(data);
+
+    login(data.username, data.password)
+        .then((data) => {
+            res.send(data)
+        })
+        .catch((err) => res.send(err))
+
 });
 
 app.listen(port, () => {

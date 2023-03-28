@@ -37,7 +37,7 @@ function NewsPage() {
 				</Grid>
 			</div>
 
-			<Navbar page={1} />
+			<Navbar page={0} />
 		</div>
 	);
 }

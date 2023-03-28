@@ -1,4 +1,5 @@
-import { scryptSync, randomBytes } from 'crypto';
+import { scryptSync, randomBytes, timingSafeEqual } from 'crypto';
+import { userData } from './index.js';
 
 function signup(username, password) {
     const salt = randomBytes(16).toString('hex');
@@ -10,9 +11,11 @@ function signup(username, password) {
 }
 
 function login(username, password) {
-    return new Promise((resolve, reject) => {
-        const user = {} // get user from database
-        const [salt, key] = user.password.split(':');
+    return new Promise(async (resolve, reject) => {
+        const user = await userData.find({ username: username })
+        if (!user) return reject(new Error('User not found'))
+
+        const [salt, key] = user[0].password.split(':');
         const hashedBuffer = scryptSync(password, salt, 64)
 
         const keyBuffer = Buffer.from(key, 'hex')
@@ -28,4 +31,4 @@ function login(username, password) {
 
 }
 
-export default { signup, login }
+export { signup, login }
