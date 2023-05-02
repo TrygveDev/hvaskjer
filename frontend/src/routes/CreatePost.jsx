@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import axios from "axios";
 import TypeInput from "../components/TypeInput";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const styles = {
 	form: {
@@ -23,6 +24,10 @@ const styles = {
 };
 
 function CreatePost() {
+	const [user] = useState(
+		Cookies.get("USERNAME") ? Cookies.get("USERNAME") : null
+	);
+
 	const nav = useNavigate();
 	const [date, setDate] = useState(dayjs(Date.now()));
 	const [title, setTitle] = useState("");
@@ -43,11 +48,12 @@ function CreatePost() {
 				desc: description,
 				img: image,
 				date: newDate,
-				author: "Administrasjonen",
+				author: user,
 			})
 			.then(function (response) {
 				console.log(response);
-				nav("/nypost");
+				alert("Posten ble lagt ut!");
+				nav("/dinside");
 			})
 			.catch(function (error) {
 				console.log(error);

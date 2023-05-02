@@ -1,7 +1,7 @@
 import { postData } from "./schemas.js";
 
 export default function savePost(data) {
-    return new promise(async (resolve, reject) => {
+    return new promise(async (resolve) => {
 
         const entry = new postData({
             type: data.type,

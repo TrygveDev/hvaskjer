@@ -18,14 +18,16 @@ function UserPage() {
 	);
 
 	function createUser() {
-		console.log(username, password);
 		axios
 			.post("http://localhost:5001/createUser", {
 				username: username,
 				password: password,
 			})
 			.then(function (response) {
-				console.log(response);
+				if (response.data === "Username already exists")
+					return alert(response.data);
+				console.log(response.data);
+				return alert("User created!");
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -41,10 +43,15 @@ function UserPage() {
 			})
 			.then(function (response) {
 				console.log(response);
+
+				if (response.data === "Username or password is incorrect!")
+					return alert(response.data);
+
 				Cookie.set("USERNAME", username);
 				Cookie.set("LOGGEDIN", true, { expires: 1 });
 				setIsLoggedIn(true);
 				setUser(username);
+				return "Logged in!";
 			})
 			.catch(function (error) {
 				console.log(error);

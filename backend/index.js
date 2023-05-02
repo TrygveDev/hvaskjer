@@ -11,8 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: ["http://localhost:3000"], credentials: true }));
 set("strictQuery", false);
-connect("mongodb+srv://trygvedev:lJBkBrWmIhqUd1IZ@cluster0.juec4ve.mongodb.net/activities", {});
-
+connect("mongodb+srv://trygvedev:@cluster0.juec4ve.mongodb.net/hvaskjer", {});
 
 // Fetch posts from database
 app.get("/fetchData", async (req, res) => {
@@ -37,8 +36,8 @@ app.post("/createUser", async (req, res) => {
     const data = req.body;
 
     createUser(data.username, data.password)
-        .then((user) => {
-            res.send(user)
+        .then((response) => {
+            res.send(response)
         })
         .catch((err) => res.send(err))
 });
@@ -47,7 +46,6 @@ app.post("/createUser", async (req, res) => {
 // Login user
 app.post("/loginUser", async (req, res) => {
     const data = req.body;
-    console.log(data);
 
     authUser(data.username, data.password)
         .then((data) => {
@@ -59,5 +57,5 @@ app.post("/loginUser", async (req, res) => {
 
 // Listen on port
 app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+    console.log(`\nServer listening on port ${port}\n`);
 });

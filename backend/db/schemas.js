@@ -11,11 +11,16 @@ const postSchema = new Schema({
 });
 const postData = model("postData", postSchema);
 
+
+
 const userSchema = new Schema({
     username: String,
     password: String,
+    auth: String,
     createdAt: { type: Date, expires: 60 * 60 * 12 },
 });
 const userData = model("userData", userSchema);
+
+
 
 export { postData, userData };

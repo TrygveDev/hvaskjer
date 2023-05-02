@@ -16,7 +16,10 @@ function HomePage() {
 			.get("http://localhost:5001/fetchData")
 			.then(function (response) {
 				console.log(response);
-				setActivities(response.data);
+				const data = response.data.sort(
+					(a, b) => new Date(b.date) - new Date(a.date)
+				);
+				setActivities(data);
 			})
 			.catch(function (error) {
 				console.log(error);
